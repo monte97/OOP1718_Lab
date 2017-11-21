@@ -8,6 +8,7 @@ import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -49,11 +50,16 @@ public final class LambdaFilter extends JFrame {
                    .reduce("", (s1, s2) -> s1 + " " + s2);
         }),
         WCOUNT("Write the count for each word", s -> {
+            List<String> words = Arrays.asList(s.split(" "));
             Map<String, Integer> ret = new HashMap<>();
-            Arrays.asList(s.split(" ")).stream()
-                
-                
-            return "";
+            words.forEach(s1 -> {
+                if (ret.containsKey(s1)) {
+                    ret.put(s1, ret.get(s1) + 1);
+                } else {
+                    ret.put(s1, 1);
+                }
+            });
+            return ret.toString();
         });
 
         private final String commandName;
